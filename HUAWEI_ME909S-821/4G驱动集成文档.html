@@ -1,0 +1,223 @@
+<html>
+<head>
+  <title>Evernote Export</title>
+  <basefont face="微软雅黑" size="2" />
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  <meta name="exporter-version" content="Evernote Windows/307934 (zh-CN, DDL); Windows/10.0.0 (Win64);"/>
+  <style>
+    body, td {
+      font-family: 微软雅黑;
+      font-size: 10pt;
+    }
+  </style>
+</head>
+<body>
+<a name="357"/>
+
+<div>
+<span><div style="word-wrap: break-word; -webkit-nbsp-mode: space; -webkit-line-break: after-white-space;">  一、概述<br clear="none"/>
+  本文档主要面向使用鼎桥EM350数据卡的Linux和Android第三方用户做驱动集成使用<br clear="none"/>
+对于鼎桥EM350数据卡来说，与第三方Linux或Android设备连接时，其接口上报的类型为USB复合设备接口，因此第三方设备必须支持如下的USB驱动框架<br clear="none"/>
+          <img src="4G驱动集成文档_files/Image.png" type="image/png" data-filename="Image.png" style="cursor: default; height: auto;"/><br clear="none"/>
+其中hw_cdc_driver是USB网卡设备驱动，该驱动目前还没有发布到Linux版本中，usb-storge和option串口驱动已经可以在Linux发布的版本中找到<br clear="none"/><br clear="none"/><br clear="none"/>
+二、集成所需文件说明<br clear="none"/>
+   
+<table style="border-collapse: collapse; margin-left: 56.7000pt; mso-table-layout-alt: fixed; padding: 0.0000pt 5.4000pt 0.0000pt 5.4000pt;width:527px;"><tbody><tr><td colspan="1" rowspan="1" style="padding: 0.0000pt 5.4000pt 0.0000pt 5.4000pt; mso-border-left-alt: 0.5000pt solid #000000; mso-border-right-alt: 0.5000pt solid #000000; mso-border-top-alt: 0.5000pt solid #000000; mso-border-bottom-alt: 0.5000pt solid #000000; border: 0.5000pt solid #000000;width:51.23339658444023%;" valign="top" width="263"><p style="text-indent: 68.2500pt; margin-top: 0pt; margin-bottom: 0pt;"><span style="mso-spacerun: ' yes'; font-size: 10.5000pt; font-family: '">文件名</span></p></td><td colspan="1" rowspan="1" style="padding: 0.0000pt 5.4000pt 0.0000pt 5.4000pt; border-left: none; ; mso-border-left-alt: none; ; border-right: 0.5000pt solid #000000; mso-border-right-alt: 0.5000pt solid #000000; border-top: 0.5000pt solid #000000; mso-border-top-alt: 0.5000pt solid #000000; border-bottom: 0.5000pt solid #000000; mso-border-bottom-alt: 0.5000pt solid #000000;width:48.95635673624288%;" valign="top" width="257"><p style="margin-top: 0pt; margin-bottom: 0pt;"><span style="mso-spacerun: ' yes'; font-size: 10.5000pt; font-family: '">    文件说明</span></p></td></tr><tr><td colspan="1" rowspan="1" style="width: 197.3500pt; padding: 0.0000pt 5.4000pt 0.0000pt 5.4000pt; border-left: 0.5000pt solid #000000; mso-border-left-alt: 0.5000pt solid #000000; border-right: 0.5000pt solid #000000; mso-border-right-alt: 0.5000pt solid #000000; border-top: none; ; mso-border-top-alt: 0.5000pt solid #000000; border-bottom: 0.5000pt solid #000000; mso-border-bottom-alt: 0.5000pt solid #000000;" valign="top" width="263"><p style="margin-top: 0pt; margin-bottom: 0pt;"><span style="mso-spacerun: ' yes'; font-size: 10.5000pt; font-family: '">hw_cdc_driver.c</span></p></td><td colspan="1" rowspan="1" style="width: 193.2500pt; padding: 0.0000pt 5.4000pt 0.0000pt 5.4000pt; border-left: none; ; mso-border-left-alt: none; ; border-right: 0.5000pt solid #000000; mso-border-right-alt: 0.5000pt solid #000000; border-top: none; ; mso-border-top-alt: 0.5000pt solid #000000; border-bottom: 0.5000pt solid #000000; mso-border-bottom-alt: 0.5000pt solid #000000;" valign="top" width="257"><p style="margin-top: 0pt; margin-bottom: 0pt;"><span style="mso-spacerun: ' yes'; font-size: 10.5000pt; font-family: '">USB NDIS<span style="font-family: 宋体;">网卡驱动程序</span></span></p></td></tr><tr><td colspan="1" rowspan="1" style="width: 197.3500pt; padding: 0.0000pt 5.4000pt 0.0000pt 5.4000pt; border-left: 0.5000pt solid #000000; mso-border-left-alt: 0.5000pt solid #000000; border-right: 0.5000pt solid #000000; mso-border-right-alt: 0.5000pt solid #000000; border-top: none; ; mso-border-top-alt: 0.5000pt solid #000000; border-bottom: 0.5000pt solid #000000; mso-border-bottom-alt: 0.5000pt solid #000000;" valign="top" width="263"><p style="margin-top: 0pt; margin-bottom: 0pt;"><span style="mso-spacerun: ' yes'; font-size: 10.5000pt; font-family: '">initializers.c</span></p></td><td colspan="1" rowspan="1" style="width: 193.2500pt; padding: 0.0000pt 5.4000pt 0.0000pt 5.4000pt; border-left: none; ; mso-border-left-alt: none; ; border-right: 0.5000pt solid #000000; mso-border-right-alt: 0.5000pt solid #000000; border-top: none; ; mso-border-top-alt: 0.5000pt solid #000000; border-bottom: 0.5000pt solid #000000; mso-border-bottom-alt: 0.5000pt solid #000000;" valign="top" width="257"><p style="margin-top: 0pt; margin-bottom: 0pt;"><span style="mso-spacerun: ' yes'; font-size: 10.5000pt; font-family: '">USB mass storage<span style="font-family: 宋体;">的初始化文件</span></span></p></td></tr><tr><td colspan="1" rowspan="1" style="width: 197.3500pt; padding: 0.0000pt 5.4000pt 0.0000pt 5.4000pt; border-left: 0.5000pt solid #000000; mso-border-left-alt: 0.5000pt solid #000000; border-right: 0.5000pt solid #000000; mso-border-right-alt: 0.5000pt solid #000000; border-top: none; ; mso-border-top-alt: 0.5000pt solid #000000; border-bottom: 0.5000pt solid #000000; mso-border-bottom-alt: 0.5000pt solid #000000;" valign="top" width="263"><p style="margin-top: 0pt; margin-bottom: 0pt;"><span style="mso-spacerun: ' yes'; font-size: 10.5000pt; font-family: '">initializers.</span><span style="font-size: 10.5000pt; font-family: '">h</span></p></td><td colspan="1" rowspan="1" style="width: 193.2500pt; padding: 0.0000pt 5.4000pt 0.0000pt 5.4000pt; border-left: none; ; mso-border-left-alt: none; ; border-right: 0.5000pt solid #000000; mso-border-right-alt: 0.5000pt solid #000000; border-top: none; ; mso-border-top-alt: 0.5000pt solid #000000; border-bottom: 0.5000pt solid #000000; mso-border-bottom-alt: 0.5000pt solid #000000;" valign="top" width="257"><p style="margin-top: 0pt; margin-bottom: 0pt;"><span style="mso-spacerun: ' yes'; font-size: 10.5000pt; font-family: '">initializers.c</span><span style="mso-spacerun: ' yes'; font-size: 10.5000pt; font-family: '">的头文件</span></p></td></tr><tr><td colspan="1" rowspan="1" style="width: 197.3500pt; padding: 0.0000pt 5.4000pt 0.0000pt 5.4000pt; border-left: 0.5000pt solid #000000; mso-border-left-alt: 0.5000pt solid #000000; border-right: 0.5000pt solid #000000; mso-border-right-alt: 0.5000pt solid #000000; border-top: none; ; mso-border-top-alt: 0.5000pt solid #000000; border-bottom: 0.5000pt solid #000000; mso-border-bottom-alt: 0.5000pt solid #000000;" valign="top" width="263"><p style="margin-top: 0pt; margin-bottom: 0pt;"><span style="mso-spacerun: ' yes'; font-size: 10.5000pt; font-family: '">option.c</span></p></td><td colspan="1" rowspan="1" style="width: 193.2500pt; padding: 0.0000pt 5.4000pt 0.0000pt 5.4000pt; border-left: none; ; mso-border-left-alt: none; ; border-right: 0.5000pt solid #000000; mso-border-right-alt: 0.5000pt solid #000000; border-top: none; ; mso-border-top-alt: 0.5000pt solid #000000; border-bottom: 0.5000pt solid #000000; mso-border-bottom-alt: 0.5000pt solid #000000;" valign="top" width="257"><p style="margin-top: 0pt; margin-bottom: 0pt;"><span style="mso-spacerun: ' yes'; font-size: 10.5000pt; font-family: '">USB serial<span style="font-family: 宋体;">驱动程序</span></span></p></td></tr><tr><td colspan="1" rowspan="1" style="width: 197.3500pt; padding: 0.0000pt 5.4000pt 0.0000pt 5.4000pt; border-left: 0.5000pt solid #000000; mso-border-left-alt: 0.5000pt solid #000000; border-right: 0.5000pt solid #000000; mso-border-right-alt: 0.5000pt solid #000000; border-top: none; ; mso-border-top-alt: 0.5000pt solid #000000; border-bottom: 0.5000pt solid #000000; mso-border-bottom-alt: 0.5000pt solid #000000;" valign="top" width="263"><p style="margin-top: 0pt; margin-bottom: 0pt;"><span style="mso-spacerun: ' yes'; font-size: 10.5000pt; font-family: '">unusual_devs.h</span></p></td><td colspan="1" rowspan="1" style="width: 193.2500pt; padding: 0.0000pt 5.4000pt 0.0000pt 5.4000pt; border-left: none; ; mso-border-left-alt: none; ; border-right: 0.5000pt solid #000000; mso-border-right-alt: 0.5000pt solid #000000; border-top: none; ; mso-border-top-alt: 0.5000pt solid #000000; border-bottom: 0.5000pt solid #000000; mso-border-bottom-alt: 0.5000pt solid #000000;" valign="top" width="257"><p style="margin-top: 0pt; margin-bottom: 0pt;"><span style="mso-spacerun: ' yes'; font-size: 10.5000pt; font-family: '">USB<span style="font-family: 宋体;">设备非常用的</span><span style="font-family: Arial;">id_table</span></span></p></td></tr><tr><td colspan="1" rowspan="1" style="width: 197.3500pt; padding: 0.0000pt 5.4000pt 0.0000pt 5.4000pt; border-left: 0.5000pt solid #000000; mso-border-left-alt: 0.5000pt solid #000000; border-right: 0.5000pt solid #000000; mso-border-right-alt: 0.5000pt solid #000000; border-top: none; ; mso-border-top-alt: 0.5000pt solid #000000; border-bottom: 0.5000pt solid #000000; mso-border-bottom-alt: 0.5000pt solid #000000;" valign="top" width="263"><p style="margin-top: 0pt; margin-bottom: 0pt;"><span style="mso-spacerun: ' yes'; font-size: 10.5000pt; font-family: '">usb.c</span></p></td><td colspan="1" rowspan="1" style="width: 193.2500pt; padding: 0.0000pt 5.4000pt 0.0000pt 5.4000pt; border-left: none; ; mso-border-left-alt: none; ; border-right: 0.5000pt solid #000000; mso-border-right-alt: 0.5000pt solid #000000; border-top: none; ; mso-border-top-alt: 0.5000pt solid #000000; border-bottom: 0.5000pt solid #000000; mso-border-bottom-alt: 0.5000pt solid #000000;" valign="top" width="257"><p style="margin-top: 0pt; margin-bottom: 0pt;"><span style="mso-spacerun: ' yes'; font-size: 10.5000pt; font-family: '">USB mass storage<span style="font-family: 宋体;">驱动</span></span></p></td></tr></tbody></table><br clear="none"/>
+三、驱动集成<br clear="none"/>
+涉及的内核源代码有：<br clear="none"/>
+drivers\usb\storage\initializers.c<br clear="none"/>
+drivers\usb\storage\initializers.h<br clear="none"/>
+drivers\usb\storage\unusual_devs.h
+<div>drivers\usb\storage\usb.c</div><div>driver\usb\storage\usual_tables.c</div>
+具体的修改步骤如下：<br clear="none"/>
+  1、修改initializers.c<br clear="none"/>
+在文件最后增加usb_stor_huawei_init和usb_stor_huawei_scsi_init这两个函数的定义<br clear="none"/>
+     <img src="4G驱动集成文档_files/Image [1].png" type="image/png" data-filename="Image.png" style="cursor: default; height: auto;"/><br clear="none"/><br clear="none"/>
+2、修改initializers.h<br clear="none"/>
+     在文件最后增加usb_stor_huawei_init和usb_stor_huawei_scsi_init这两个函数<br clear="none"/>
+      的声明<br clear="none"/>
+     <img src="4G驱动集成文档_files/Image [2].png" type="image/png" data-filename="Image.png" style="cursor: default; height: auto;"/><br clear="none"/>
+  3、修改unusual_devs.h<br clear="none"/>
+      增加如下两个结构<br clear="none"/>
+UNUSUAL_DEV_HW(  0x12d1, 0x1c1b, 0x0001, 0x0001,0x08,<br clear="none"/>
+          &quot;HUAWEI&quot;,<br clear="none"/>
+          &quot;HUAWEI MOBILE Mass Storage&quot;,<br clear="none"/>
+          US_SC_DEVICE, US_PR_DEVICE, usb_stor_huawei_scsi_init,<br clear="none"/>
+          0 ),<br clear="none"/><br clear="none"/>
+UNUSUAL_DEV_HW(  0x12d1, 0x1c1b, 0x0102, 0x0102,0x08,<br clear="none"/>
+          &quot;HUAWEI&quot;,<br clear="none"/>
+          &quot;HUAWEI MOBILE Mass Storage&quot;,<br clear="none"/>
+          US_SC_DEVICE, US_PR_DEVICE, usb_stor_huawei_scsi_init,<br clear="none"/>
+          0 ),<br clear="none"/>
+UNUSUAL_DEV_HW(  0x12d1, 0x14fe, 0x0001, 0x0001,0x08,<br clear="none"/>
+          &quot;HUAWEI&quot;,<br clear="none"/>
+          &quot;HUAWEI MOBILE Mass Storage&quot;,<br clear="none"/>
+          US_SC_DEVICE, US_PR_DEVICE, usb_stor_huawei_scsi_init,0),<br clear="none"/>
+UNUSUAL_DEV_HW(  0x12d1, 0x14fe, 0x0102, 0x0102,0x08,<br clear="none"/>
+          &quot;HUAWEI&quot;,<br clear="none"/>
+          &quot;HUAWEI MOBILE Mass Storage&quot;,<br clear="none"/>
+          US_SC_DEVICE, US_PR_DEVICE, usb_stor_huawei_scsi_init,<br clear="none"/>
+          0 ),<br clear="none"/>
+    <br clear="none"/>
+4、修改USB.c<br clear="none"/>
+在static struct us_unusual_dev us_unusual_dev_list[]上面增加<br clear="none"/>
+      #undef UNUSUAL_DEV_HW<br clear="none"/>
+#define UNUSUAL_DEV_HW(id_vendor, id_product, bcdDeviceMin, bcdDeviceMax, \<br clear="none"/>
+               bInterfaceClass, vendor_Name, product_Name, use_Protocol, use_Transport, \<br clear="none"/>
+               init_Function, flags) \<br clear="none"/>
+               { \<br clear="none"/>
+                  .vendorName = vendor_Name,     \<br clear="none"/>
+                  .productName = product_Name,     \<br clear="none"/>
+                  .useProtocol = use_Protocol,     \<br clear="none"/>
+                  .useTransport = use_Transport,     \<br clear="none"/>
+                  .initFunction = init_Function,     \<br clear="none"/>
+               }<br clear="none"/>
+在static struct us_unusual_dev us_unusual_dev_list[]里面增加<br clear="none"/>
+#   undef UNUSUAL_DEV_HW<br clear="none"/>
+   5、修改usual_tables.c<br clear="none"/>
+在#define USUAL_DEV(useProto, useTrans, useType) \<br clear="none"/>
+{ USB_INTERFACE_INFO(USB_CLASS_MASS_STORAGE, useProto, useTrans), \<br clear="none"/>
+  .driver_info = (USB_US_TYPE_STOR&lt;&lt;24) }<br clear="none"/>
+      下面增加<br clear="none"/>
+#define UNUSUAL_DEV_HW(id_vendor, id_product, bcdDeviceMin, bcdDeviceMax, \<br clear="none"/>
+               bIntClass, vendorName, productName, useProtocol, useTransport, \<br clear="none"/>
+               initFunction, flags) \<br clear="none"/>
+               { .match_flags = (USB_DEVICE_ID_MATCH_DEVICE_AND_VERSION | USB_DEVICE_ID_MATCH_INT_CLASS), \<br clear="none"/>
+               .idVendor = (id_vendor), .idProduct = (id_product), \<br clear="none"/>
+               .bcdDevice_lo = (bcdDeviceMin), .bcdDevice_hi = (bcdDeviceMax), \<br clear="none"/>
+               .bInterfaceClass = (bIntClass), \<br clear="none"/>
+               .driver_info = (flags)|(1&lt;&lt;24)}<br clear="none"/><br clear="none"/>
+6、USB 串口驱动的集成<br clear="none"/>
+涉及的内核源代码有：<br clear="none"/>
+drivers\usb\serial\option.c<br clear="none"/>
+在product_id的宏定义中增加<br clear="none"/>
+#define HUAWEI_PRODUCT_E1506 0x1506<br clear="none"/>
+#define HUAWEI_PRODUCT_E1C05    0x1C05<br clear="none"/><br clear="none"/>
+在option_ids[]数组中增加<br clear="none"/>
+{ USB_DEVICE(HUAWEI_VENDOR_ID, HUAWEI_PRODUCT_E1506) },<br clear="none"/>
+{ USB_DEVICE(HUAWEI_VENDOR_ID, HUAWEI_PRODUCT_E1C05) },<br clear="none"/>
+7、USB NDIS网卡驱动的集成<br clear="none"/>
+7.1、将NDIS网卡驱动程序hw_cdc_driver.c拷贝到内核源代码drivers\net\usb\目录下。<br clear="none"/>
+因为我们是2.6.37的内核版本。会出现重复定义问题,<br clear="none"/>
+7.1.1在hw_cdc_driver.c中的#include&lt;liux/unaligned/access_ok.h&gt;与include&lt;liux/unaligned/le_byteshift.h&gt;中重负定义。<br clear="none"/>
+因为在该.c中包含的#include&lt;linux/etherdevice.h&gt;中包含#include&lt;asm/unaligned.h&gt;下包含#unclude&lt;liux/unaligned/le_byteshift.h&gt;.
+<div> 将access_ok.h屏蔽<br clear="none"/>
+7.1.2  因为2.6.37版本的内核不带ncm.h所以要屏蔽,ncm.h中的内容在cdc.h已经包含<br clear="none"/>
+将#if LINUX_ERSION_CODE &gt;= KERNEL_VERSION(2.6.35)<br clear="none"/>
+#include&lt;linux/usb/ncm.h&gt;<br clear="none"/>
+改为#if LINUX_ERSION_CODE &lt;= KERNEL_VERSION(2.6.35)<br clear="none"/>
+#include&lt;linux/usb/ncm.h&gt;<br clear="none"/>
+  将linux/usb/cdc.h中和hw_cdc_driver.c重复定义的屏蔽  </div><div><br clear="none"/>
+        7.2、编辑drivers\net\usb\下的Kconfig文件，在下图所示位置增加config        USB_NET_HW_CDC_DRIVER的配置内容</div><div>    <img src="4G驱动集成文档_files/Image [3].png" type="image/png" data-filename="Image.png" style="cursor: default; height: auto;"/></div><div><br/></div><div><br/></div><div>7.3、编辑drivers\net\usb\目录下的Makefile文件，增加如图所示内容<br clear="none"/>
+          <img src="4G驱动集成文档_files/Image [4].png" type="image/png" data-filename="Image.png" style="cursor: default; height: auto;"/>       <br clear="none"/>
+             7.4、在文件系统根目录下执行make menuconfig<br clear="none"/>
+        7.5、按照下图顺序选择菜单Device Drivers&gt;Network device support&gt;USB Network Adapters<br clear="none"/><br clear="none"/>
+             <img src="4G驱动集成文档_files/Image [5].png" type="image/png" data-filename="Image.png" style="cursor: default; height: auto;"/><br clear="none"/><br clear="none"/>
+               <img src="4G驱动集成文档_files/Image [6].png" type="image/png" data-filename="Image.png" style="cursor: default; height: auto;"/><br clear="none"/>
+               <img src="4G驱动集成文档_files/Image [7].png" type="image/png" data-filename="Image.png" style="cursor: default; height: auto;"/><br clear="none"/>
+  7. 6、保存退出，然后编译整个内核<br clear="none"/>
+8测试驱动<br clear="none"/>
+利用我们提供的串口应用程序，对虚拟出来的USB串口和网口进行测试。<br clear="none"/>
+首先要将comtest.c和main.c分别编译成可执行文件comtest和attest，放到根文件系统的bin路径下。<br clear="none"/>
+当系统启动时显示<br clear="none"/>
+              <img src="4G驱动集成文档_files/Image [8].png" type="image/png" data-filename="Image.png" style="cursor: default; height: auto;"/> <br clear="none"/><br clear="none"/>
+在shell下执行cat  /proc/bus/usb/devices，显示：<br clear="none"/>
+T:  Bus=02 Lev=00 Prnt=00 Port=00 Cnt=00 Dev#=  1 Spd=12  MxCh= 2<br clear="none"/>
+B:  Alloc=  0/900 us ( 0%), #Int=  0, #Iso=  0<br clear="none"/>
+D:  Ver= 1.10 Cls=09(hub  ) Sub=00 Prot=00 MxPS=64 #Cfgs=  1<br clear="none"/>
+P:  Vendor=0000 ProdID=0000 Rev= 2.06<br clear="none"/>
+S:  Manufacturer=Linux 2.6.21.5 ohci_hcd<br clear="none"/>
+S:  Product=OHCI Host Controller<br clear="none"/>
+S:  SerialNumber=0000:00:04.0<br clear="none"/>
+C:* #Ifs= 1 Cfg#= 1 Atr=e0 MxPwr=  0mA<br clear="none"/>
+I:* If#= 0 Alt= 0 #EPs= 1 Cls=09(hub  ) Sub=00 Prot=00 Driver=hub<br clear="none"/>
+E:  Ad=81(I) Atr=03(Int.) MxPS=   2 Ivl=255ms<br clear="none"/>
+T:  Bus=01 Lev=00 Prnt=00 Port=00 Cnt=00 Dev#=  1 Spd=480 MxCh= 2<br clear="none"/>
+B:  Alloc=  0/800 us ( 0%), #Int=  2, #Iso=  0<br clear="none"/>
+D:  Ver= 2.00 Cls=09(hub  ) Sub=00 Prot=01 MxPS=64 #Cfgs=  1<br clear="none"/>
+P:  Vendor=0000 ProdID=0000 Rev= 2.06<br clear="none"/>
+S:  Manufacturer=Linux 2.6.21.5 ehci_hcd<br clear="none"/>
+S:  Product=EHCI Host Controller<br clear="none"/>
+S:  SerialNumber=0000:00:04.1<br clear="none"/>
+C:* #Ifs= 1 Cfg#= 1 Atr=e0 MxPwr=  0mA<br clear="none"/>
+I:* If#= 0 Alt= 0 #EPs= 1 Cls=09(hub  ) Sub=00 Prot=00 Driver=hub<br clear="none"/>
+E:  Ad=81(I) Atr=03(Int.) MxPS=   4 Ivl=256ms<br clear="none"/><br clear="none"/><br clear="none"/>
+T:  Bus=01 Lev=01 Prnt=01 Port=00 Cnt=01 Dev#=  2 Spd=480 MxCh= 4<br clear="none"/>
+D:  Ver= 2.00 Cls=09(hub  ) Sub=00 Prot=02 MxPS=64 #Cfgs=  1<br clear="none"/>
+P:  Vendor=0424 ProdID=2514 Rev= b.b3<br clear="none"/>
+C:* #Ifs= 1 Cfg#= 1 Atr=e0 MxPwr=  2mA<br clear="none"/>
+I:  If#= 0 Alt= 0 #EPs= 1 Cls=09(hub  ) Sub=00 Prot=01 Driver=hub<br clear="none"/>
+E:  Ad=81(I) Atr=03(Int.) MxPS=   1 Ivl=256ms<br clear="none"/>
+I:* If#= 0 Alt= 1 #EPs= 1 Cls=09(hub  ) Sub=00 Prot=02 Driver=hub<br clear="none"/>
+E:  Ad=81(I) Atr=03(Int.) MxPS=   1 Ivl=256ms<br clear="none"/>
+T:  Bus=01 Lev=02 Prnt=02 Port=00 Cnt=01 Dev#=  4 Spd=480 MxCh= 0<br clear="none"/>
+D:  Ver= 2.00 Cls=00(&gt;ifc ) Sub=00 Prot=00 MxPS=64 #Cfgs=  1<br clear="none"/>
+P:  Vendor=12d1 ProdID=1506 Rev= 1.02<br clear="none"/>
+S:  Manufacturer=HUAWEI Technology<br clear="none"/>
+S:  Product=HUAWEI Mobile<br clear="none"/>
+C:* #Ifs= 9 Cfg#= 1 Atr=80 MxPwr=500mA<br clear="none"/>
+I:* If#= 0 Alt= 0 #EPs= 2 Cls=ff(vend.) Sub=02 Prot=14 Driver=option<br clear="none"/>
+E:  Ad=81(I) Atr=02(Bulk) MxPS= 512 Ivl=0ms<br clear="none"/>
+E:  Ad=01(O) Atr=02(Bulk) MxPS= 512 Ivl=4ms<br clear="none"/>
+I:* If#= 1 Alt= 0 #EPs= 2 Cls=ff(vend.) Sub=02 Prot=13 Driver=option<br clear="none"/>
+E:  Ad=82(I) Atr=02(Bulk) MxPS= 512 Ivl=0ms<br clear="none"/>
+E:  Ad=02(O) Atr=02(Bulk) MxPS= 512 Ivl=4ms<br clear="none"/><span style="background-color: #fffaa5; -evernote-highlight: true;">I:* If#= 2 Alt= 0 #EPs= 2 Cls=ff(vend.) Sub=02 Prot=12 Driver=option（这个就是ttyUSB2 也就是AT口）</span><br clear="none"/>
+E:E:  Ad=03(O) Atr=02(Bulk) MxPS= 512 Ivl=4ms<br clear="none"/>
+I:* If#= 3 Alt= 0 #EPs= 2 Cls=ff(vend.) Sub=02 Prot=0a Driver=option<br clear="none"/>
+E:  Ad=84(I) Atr=02(Bulk) MxPS= 512 Ivl=0ms<br clear="none"/>
+E:  Ad=04(O) Atr=02(Bulk) MxPS= 512 Ivl=4ms<br clear="none"/>
+I:* If#= 4 Alt= 0 #EPs= 2 Cls=ff(vend.) Sub=02 Prot=03 Driver=option<br clear="none"/>
+E:  Ad=85(I) Atr=02(Bulk) MxPS= 512 Ivl=0ms<br clear="none"/>
+E:  Ad=05(O) Atr=02(Bulk) MxPS= 512 Ivl=4ms<br clear="none"/>
+I:  If#= 5 Alt= 0 #EPs= 1 Cls=ff(vend.) Sub=02 Prot=16 Driver=huawei_ether<br clear="none"/>
+E:  Ad=86(I) Atr=03(Int.) MxPS=  64 Ivl=2ms<br clear="none"/>
+I:* If#= 5 Alt= 1 #EPs= 3 Cls=ff(vend.) Sub=02 Prot=16 Driver=huawei_ether<br clear="none"/>
+E:  Ad=86(I) Atr=03(Int.) MxPS=  64 Ivl=2ms<br clear="none"/>
+  Ad=83(I) Atr=02(Bulk) MxPS= 512 Ivl=0ms<br clear="none"/>
+E:  Ad=87(I) Atr=02(Bulk) MxPS= 512 Ivl=0ms<br clear="none"/>
+E:  Ad=06(O) Atr=02(Bulk) MxPS= 512 Ivl=4ms<br clear="none"/>
+I:* If#= 6 Alt= 0 #EPs= 2 Cls=ff(vend.) Sub=02 Prot=05 Driver=option<br clear="none"/>
+E:  Ad=88(I) Atr=02(Bulk) MxPS= 512 Ivl=0ms<br clear="none"/>
+E:  Ad=07(O) Atr=02(Bulk) MxPS= 512 Ivl=4ms<br clear="none"/>
+I:* If#= 7 Alt= 0 #EPs= 2 Cls=08(stor.) Sub=06 Prot=50 Driver=usb-storage<br clear="none"/>
+E:  Ad=08(O) Atr=02(Bulk) MxPS= 512 Ivl=0ms<br clear="none"/>
+E:  Ad=89(I) Atr=02(Bulk) MxPS= 512 Ivl=0ms<br clear="none"/>
+I:* If#= 8 Alt= 0 #EPs= 2 Cls=08(stor.) Sub=06 Prot=50 Driver=usb-storage<br clear="none"/>
+E:  Ad=09(O) Atr=02(Bulk) MxPS= 512 Ivl=0ms<br clear="none"/>
+E:  Ad=8a(I) Atr=02(Bulk) MxPS= 512 Ivl=0ms<br clear="none"/>
+T:  Bus=01 Lev=02 Prnt=02 Port=02 Cnt=02 Dev#=  3 Spd=480 MxCh= 0<br clear="none"/>
+D:  Ver= 2.00 Cls=00(&gt;ifc ) Sub=00 Prot=00 MxPS=64 #Cfgs=  1<br clear="none"/>
+P:  Vendor=04b4 ProdID=4624 Rev= 0.19<br clear="none"/>
+S:  Manufacturer=huawei<br clear="none"/>
+S:  Product=nand-flash<br clear="none"/>
+S:  SerialNumber=8CE45CDBDDBA2DE<br clear="none"/>
+C:* #Ifs= 1 Cfg#= 1 Atr=80 MxPwr=100mA<br clear="none"/>
+I:* If#= 0 Alt= 0 #EPs= 2 Cls=08(stor.) Sub=06 Prot=50 Driver=usb-storage<br clear="none"/>
+E:  Ad=02(O) Atr=02(Bulk) MxPS= 512 Ivl=0ms<br clear="none"/>
+E:  Ad=84(I) Atr=02(Bulk) MxPS= 512 Ivl=0ms<br clear="none"/>
+这时说明USB复合设备已经被系统正确识别。然后我们运行comtest /dev/ttyUSB2或者其他ttyUSB设备，然后输入相关AT命令或shell命令，可以看到对应的输出。<br clear="none"/>
+另外如果在连接核心网的情况下，我们可以运行attest，这时关机开机命令和拨号命令就会发出。然后我们利用busybox提供的DHCP client功能（前提是必须在busybox里将udhcpc编进去，这里就不再多说了），输入udhcpc –I hed0,这时就会看到从DHCP服务器获取的租约信息，然后我们用ifconfig，就可以看到NDIS网卡hed0的ip和掩码信息了，这个时候Linux主机就通过EM350与核心网成功建立了连接。<br clear="none"/><span style="background-color: #fffaa5; -evernote-highlight: true;">注：用户最好能将udhcpc跟网卡的状态绑定，这样网卡由断开变为连接时，就能自动执行udhcpc。</span></div><div><br/></div><div><a href="4G驱动集成文档_files/attest.c"><img src="4G驱动集成文档_files/eaf3b2526189eabfa1154ace9fd27ea3.png" alt="attest.c"></a><a href="4G驱动集成文档_files/comtest.c"><img src="4G驱动集成文档_files/d23e5e07a0fc9827dd9b84c43bd15b18.png" alt="comtest.c"></a><a href="4G驱动集成文档_files/main.c"><img src="4G驱动集成文档_files/458d9a5d3839744ad6881e1770384180.png" alt="main.c"></a></div><div><br/></div><div><p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Arial; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: 1; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);"><strong>查看驱动运行状况</strong></p><p style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Arial; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: 1; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">插上4G模块，虚拟出6个ttyUSB，它们分别是：</p><div style="margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: Arial; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: 1; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);"><span style="color: rgb(153, 51, 0);">root@am335x-evm:/# ls /dev/ttyUSB*<br/>
+/dev/ttyUSB0  /dev/ttyUSB1  /dev/ttyUSB2  /dev/ttyUSB3  /dev/ttyUSB4  /dev/ttyUSB5<br/>
+1) /dev/ttyUSB0-diag port for output developing messages<br/>
+2) /dev/ttyUSB1- NMEA port for GPS NMEA data output<br/>
+3) /dev/ttyUSB2-AT port for AT commands<br/>
+4) /dev/ttyUSB3-Modem port for ppp-dial<br/>
+5) /dev/ttyUSB4-audio port</span><div><span style="color: rgb(153, 51, 0);">6) /dev/ttyUSB5-Virtual Net card</span></div></div></div><div><br/></div><div><br clear="none"/></div><div>在调试时遇到的<br clear="none"/>
+注意：我们在找错时候可以在hw_cdc_driver.c中打开debug让dubug=1<br clear="none"/>
+可以在内核添加打印信息查看出错地方printk();<br clear="none"/>
+1 ,在我们新的内核版本中需要添加使电源管理函数.我在他们给的hw_cdc_driver.c添加pm_runtime_enable(&amp;udev-&gt;dev)函数          </div><div>             <img src="4G驱动集成文档_files/Image [9].png" type="image/png" data-filename="Image.png" style="cursor: default; height: auto;"/><br clear="none"/>
+          在没有更改之前执行一些up和获取ip命令时出现如下错误 permission denied,更改后没有错误<br clear="none"/>
+          <img src="4G驱动集成文档_files/Image [10].png" type="image/png" data-filename="Image.png" style="cursor: default; height: auto;"/><br clear="none"/>
+          <img src="4G驱动集成文档_files/Image [11].png" type="image/png" data-filename="Image.png" style="cursor: default; height: auto;"/><br clear="none"/>
+更改后的正确现象<br clear="none"/>
+          <img src="4G驱动集成文档_files/Image [12].png" type="image/png" data-filename="Image.png" style="cursor: default; height: auto;"/><br clear="none"/>
+2、在执行自动获取ip地址时候出现如下错误<br clear="none"/>
+route:SIOCDELRT:no such process<br clear="none"/>
+     解决办法是  我在/etc/udhcpc.d/S50default中加 metric =0,<br clear="none"/>
+          <img src="4G驱动集成文档_files/Image [13].png" type="image/png" data-filename="Image.png" style="cursor: default; height: auto;"/><br clear="none"/>
+3,现在现象时别人能ping通我们，我ping不通他们，在执行ping命令时出现如下错误<br clear="none"/><br clear="none"/>
+          <img src="4G驱动集成文档_files/Image [14].png" type="image/png" data-filename="Image.png" style="cursor: default; height: auto;"/><br clear="none"/>
+4 开两个窗口一个使用ping命令一个使用tcpdump -i hed0<br clear="none"/>
+      或者一个窗口ping命令后台运行，在运行tcpdump命令得到的结果是能够收到回复的包。<br clear="none"/>
+     可以执行呼叫的AT指令AT^CAPTTD若呼通网络连接.</div><div>所以判断4G集成成功.</div><div><br/></div><div><br/></div><div><br/></div><div><br/></div><div><br/></div><div><span style="font-size: 19px;">注意：电信4G卡需要在attest.c代码at^ndisdup=1,1后面加运营商名称。</span></div><div><span style="font-size: 19px;">        联通和移动4G卡不需要添加运营商名称</span></div><div><span style="font-size: 19px;"><br/></span></div><div><span style="font-size: 19px;"><a href="4G驱动集成文档_files/EM350 AT指令集V2 1.pdf"><img src="4G驱动集成文档_files/5238e108c426e2f5a723341db55d93f2.png" alt="EM350 AT指令集V2 1.pdf"></a><br/></span></div><div><br/></div><div><span style="font-size: 21px;">AT指令用法：</span></div><div><span style="font-size: 21px;">编译上述comtes.c</span></div><div><span style="font-size: 21px;">执行./comtest  /dev/ttyUSB2输入AT指令</span></div><div><span style="font-size: 21px;"><br/></span></div><div><span style="font-size: 21.33333396911621px;">查询SIM卡在位状态</span></div><div><span style="color: rgb(173, 0, 0);"><span style="font-size: 21px;">AT^RSIM?</span></span></div><div><span style="font-size: 21px;">执行成功时返回：^RSIM:&lt;state&gt;</span></div><div><span style="font-size: 21px;">&lt;state&gt; :  0  表示没有任何卡接触上</span></div><div><span style="font-size: 21px;">                  1  表示已经接上SIM/USIM/UIM卡</span></div><div><span style="font-size: 21px;">                  2  表示SIM/USIM/UIM卡繁忙需要等待</span></div><div><span style="font-size: 21px;"><br/></span></div><div><span style="font-size: 21.33333396911621px;">检查网络信号强度和SIM卡情况</span></div><div><span style="color: rgb(173, 0, 0);"><span style="font-size: 21.33333396911621px;">AT+CSQ</span></span></div><div><span style="font-size: 21.33333396911621px;">执行成功时返回值： +CSQ: &lt;rssi&gt;, &lt;ber&gt;</span></div><div><span style="font-size: 21.33333396911621px;">&lt;rssi&gt;:  接受信号强度指示, 越大信号越好</span></div><div><span style="font-size: 21.33333396911621px;">              0  等于或小于-113dBm</span></div><div><span style="font-size: 21.33333396911621px;">              1   -111dBm</span></div><div><span style="font-size: 21.33333396911621px;">              2...30  取整(-109...-53)dBm</span></div><div><span style="font-size: 21.33333396911621px;">              31  等于或大于-51dBm</span></div><div><span style="font-size: 21.33333396911621px;">              99  未知或不可测</span></div><div><span style="font-size: 21.33333396911621px;">&lt;ber&gt;:   比特误码率百分比,</span></div><div><span style="font-size: 21.33333396911621px;">               0...7表示误码率由低到高，越大说明信道越不好。</span></div><div><span style="font-size: 21.33333396911621px;">               </span><span style="font-size: 21.33333396911621px;">99 未知</span> <span style="font-size: 21.33333396911621px;"> </span></div><div><span style="font-size: 21.33333396911621px;">               如果不支持BER查询， 在Execution命令和Test命令均返回99</span></div><div><span style="font-size: 21.33333396911621px;">注意：目前不支持BER，返回值为99 </span></div><div><span style="font-size: 21px;"><br/></span></div><div><span style="font-size: 21.33333396911621px;">查询制造商信息</span></div><div><span style="color: rgb(173, 0, 0);"><span style="font-size: 21.33333396911621px;">AT+CGMI</span></span></div><div><span style="font-size: 21.33333396911621px;"><br/></span></div><div><span style="font-size: 21.33333396911621px;">获取模块标示。这个命令用来得到支持的频带（GSM900， DCS 1800或者 PCS 1900）</span></div><div><span style="color: rgb(173, 0, 0);"><span style="font-size: 21.33333396911621px;">AT+CGMM</span></span></div><div><br/></div><div><span style="font-size: 21px;">获得模块的软件版本</span></div><div><span style="color: rgb(173, 0, 0);"><span style="font-size: 21px;">AT+CGMR</span></span></div><div><span style="font-size: 21.33333396911621px;"><br/></span></div><div><span style="font-size: 21.33333396911621px;">获得GSM模块的IMEI（国际移动设备标识）序列号</span></div><div><span style="color: rgb(173, 0, 0);"><span style="font-size: 21.33333396911621px;">AT+CGSN</span></span></div><div><span style="font-size: 21.33333396911621px;">执行成功时返回值：&lt;sn&gt;</span></div><div><span style="font-size: 21.33333396911621px;">&lt;sn&gt;:  字符串，产品序列号</span></div><div><span style="font-size: 21.33333396911621px;">            构成如下表：</span></div><div><span style="font-size: 21.33333396911621px;">            <img src="4G驱动集成文档_files/1.jpg" type="image/jpeg" data-filename="1.jpg" style="height:auto;" width="578"/></span></div><div><span style="font-size: 21.33333396911621px;">            例如： 如果TAC为&quot;35154800&quot; , SNR为 &quot;122544&quot;， Spare为&quot;0&quot;,则IMEI为&quot;</span><span style="font-size: 21.33333396911621px;">351548001225440</span><span style="font-size: 21.33333396911621px;">&quot;</span></div><div><span style="font-size: 21.33333396911621px;"><br/></span></div><div><span style="font-size: 21.33333396911621px;">软卡硬卡查询指令</span></div><div><span style="font-size: 21px;"><span style="color: rgb(173, 0, 0);">AT^CQST?</span></span></div><div><span style="font-size: 21px;">执行成功时返回值：^CQST:&lt;n&gt;</span></div><div><span style="font-size: 21px;">&lt;n&gt;:   0 硬卡</span></div><div><span style="font-size: 21px;">           1 软卡</span></div><div><br/></div><div><span style="font-size: 21.33333396911621px;">查询以太网控制模块状态</span></div><div><span style="color: rgb(173, 0, 0);"><span style="font-size: 21.33333396911621px;">AT^NDISSTATQRY?</span></span></div><div><span style="font-size: 21.33333396911621px;">执行成功返回值： ^NDISSTAT:&lt;state&gt;[,&lt;pdptype&gt;]&lt;CR&gt;&lt;LF&gt;</span></div><div><span style="font-size: 21.33333396911621px;">&lt;state&gt; :        0  连接断开</span></div><div><span style="font-size: 21.33333396911621px;">                        1  已连接</span></div><div><span style="font-size: 21px;">&lt;pdptype&gt;:     &quot;IPv4&quot;</span></div><div><span style="font-size: 21px;">                         &quot;IPv6&quot;</span></div><div><br/></div><div><span style="font-size: 21px;">查询网络注册状态</span></div><div><span style="color: rgb(173, 0, 0);"><span style="font-size: 21.33333396911621px;">AT+CEREG？</span></span></div><div><span style="font-size: 21.33333396911621px;">执行成功返回值：+CEREG: &lt;n&gt;,&lt;stat&gt;[,&lt;lac&gt;,&lt;ci&gt;[,&lt;AcT&gt;]]</span></div><div><span style="font-size: 21px;">&lt;n&gt;:        0   去使能网络注册主动上报结果码</span></div><div><span style="font-size: 21px;">                 1   使能网络注册主动上报结果码+CEREG：&lt;state&gt;</span></div><div><span style="font-size: 21px;">                 2   使能网络注册主动上报结果码和位置信息主动上报结果码</span><span style="font-size: 21.33333396911621px;">+CEREG: &lt;stat&gt;[,&lt;lac&gt;,&lt;ci&gt;[,&lt;AcT&gt;]]</span></div><div><span style="font-size: 21px;">&lt;state&gt;:   0  未注册，未进行附着或搜网操作</span></div><div><span style="font-size: 21px;">                  1  在本地网注册</span></div><div><span style="font-size: 21px;">                  2  未注册，正在进行</span><span style="font-size: 21px;">附着或搜网操作</span></div><div><span style="font-size: 21px;">                  3  注册被拒绝</span></div><div><span style="font-size: 21px;">                  4  未知</span></div><div><span style="font-size: 21px;">                   5  已注册，漫游状态</span></div><div><span style="font-size: 21px;">&lt;lac&gt;:   字符串类型，两字节十六进制形式的跟踪区域码</span></div><div><span style="font-size: 21px;">&lt;ci&gt;: 字符串类型，四字节十六进制形式的(GERAN/UTRAN/E-UTRAN的ID)</span></div><div><span style="font-size: 21px;">&lt;AcT&gt;: 注册网的接入技术</span></div><div><span style="font-size: 21px;">             0   GSM</span></div><div><span style="font-size: 21px;">             1   GSM  Compact</span></div><div><span style="font-size: 21px;">             2   UTRAN</span></div><div><span style="font-size: 21px;">             3    GSM w/EGPRS</span></div><div><span style="font-size: 21px;">             4    UTRAN  w/HSDPA</span></div><div><span style="font-size: 21px;">             5    UTRAN  w/HSUPA</span></div><div><span style="font-size: 21px;">             6    UTRAN  w/HSDPA  and HSUPA</span></div><div><span style="font-size: 21px;">             7    E-UTRAN</span></div><div><span style="font-size: 21px;"><br/></span></div><div><span style="font-size: 21.33333396911621px;">设置MT功能模式</span></div><div><span style="color: rgb(173, 0, 0);"><span style="font-size: 21.33333396911621px;">AT+CFUN=&lt;fun&gt;</span></span></div><div><span style="font-size: 21px;">&lt;fun&gt;:  0  设置为最小模式</span></div><div><span style="font-size: 21px;">              1   设置为online模式（开机后的默认值）</span></div><div><span style="font-size: 21px;"><br/></span></div><div><span style="font-size: 21.33333396911621px;">设置和查询NDIS拨号状态</span></div><ul><li><span style="font-size: 21.33333396911621px;">当AT^NDISDUP=1,1时，拨号时不需要其他参数</span></li><li><span style="font-size: 21.33333396911621px;">当AT^NDISDUP=1,0时，断开网络连接</span></li></ul><div><span style="font-size: 21.33333396911621px;"><br/></span></div><div><span style="color: rgb(173, 0, 0);"><span style="font-size: 21.33333396911621px;">AT^NDISDUP=&lt;pdpid&gt;,&lt;connect&gt;[,&lt;APN&gt;[,&lt;username&gt;[,&lt;passwd&gt;[,&lt;authpref&gt;]]]]</span></span></div><div><span style="font-size: 21.33333396911621px;">&lt;pdpid&gt;:     整数值， pdp上下文标识， 1默认为1个PDP (后续可扩展到16)</span></div><div><span style="font-size: 21px;">&lt;connect&gt;:  整数值，连接状态</span></div><div><span style="font-size: 21px;">                      0  断开连接</span></div><div><span style="font-size: 21px;">                      1  建立连接</span></div><div><span style="font-size: 21.33333396911621px;">&lt;APN&gt;:  字符串参数， 接入点名字，0~99byte</span></div><div><span style="font-size: 21px;">&lt;usrname&gt;:  字符串参数，用户名， 0~255byte</span></div><div><span style="font-size: 21px;">&lt;passwrd&gt;:   字符串参数，密码，0~255byte</span></div><div><span style="font-size: 21px;">&lt;auth&gt;:  整数型，认证参考</span></div><div><span style="font-size: 21px;">                1   PAP</span></div><div><span style="font-size: 21px;">                 2   CHAP</span></div><div><span style="font-size: 21px;">                 3   MsChapV2 </span></div><div><span style="font-size: 21px;"><br/></span></div><div><span style="font-size: 21px;"><br/></span></div><div><span style="font-size: 21px;"><br/></span></div><div><span style="font-size: 21px;"><br/></span></div><div><span style="font-size: 21px;"><br/></span></div><div><span style="font-size: 21px;"><br/></span></div><div><span style="font-size: 21px;"><br/></span></div><div><span style="font-size: 21px;"><br/></span></div><div><span style="font-size: 21px;"><br/></span></div><div><span style="font-size: 21px;"><br/></span></div><div><span style="font-size: 21px;"><br/></span></div><div><span style="font-size: 21px;"><br/></span></div><div><span style="font-size: 21px;"><br/></span></div><div><span style="font-size: 21px;"><br/></span></div><div><span style="font-size: 21px;"><br/></span></div><div><span style="font-size: 21px;"><br/></span></div><div><span style="font-size: 21px;"><br/></span></div><div><span style="font-size: 21px;"><br/></span></div><div><span style="font-size: 21px;"><br/></span></div><div><span style="font-size: 21px;"><br/></span></div><div><span style="font-size: 21px;"><br/></span></div><div><span style="font-size: 21px;"><br/></span></div><div><span style="font-size: 21px;"><br/></span></div><div><span style="font-size: 21px;"><br/></span></div><div><span style="font-size: 21px;"><br/></span></div><div><span style="font-size: 21px;"><br/></span></div><div><span style="font-size: 21px;"><br/></span></div><div><span style="font-size: 21px;"><br/></span></div><div><span style="font-size: 21px;"><br/></span></div><div><span style="font-size: 21px;"><br/></span></div><div><span style="font-size: 21px;"><br/></span></div><div><span style="font-size: 21px;"><br/></span></div><div><span style="font-size: 21px;"><br/></span></div><div><span style="font-size: 21px;"><br/></span></div><div><span style="font-size: 21px;"><br/></span></div><div><span style="font-size: 21px;"><br/></span></div><div><span style="font-size: 21px;"><br/></span></div><div><span style="font-size: 21px;"><br/></span></div><div><span style="font-size: 21px;"><br/></span></div><div><span style="font-size: 21px;"><br/></span></div><div><span style="font-size: 21px;"><br/></span></div><div><span style="font-size: 21px;"><br/></span></div><div><span style="font-size: 21px;"><br/></span></div><div><span style="font-size: 21px;"><br/></span></div><div><span style="font-size: 21px;"><br/></span></div><div><span style="font-size: 21px;"><br/></span></div><div><span style="font-size: 21px;"><br/></span></div><div><span style="font-size: 21px;"><br/></span></div><div><span style="font-size: 21px;"><br/></span></div><div><span style="font-size: 21px;"><br/></span></div><div><br/></div><div><br/></div><div><br/></div><div><br/></div><div><br/></div><div><br/></div><div><br/></div><div><br/></div><div><br/></div><div><br/></div><div><br/></div><div><br/></div><div><br/></div><div><br/></div></div></span>
+</div></body></html> 
