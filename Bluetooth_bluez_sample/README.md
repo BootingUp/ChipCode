@@ -81,6 +81,26 @@ HCI有4种不同形式的传输：**Commands, Event, ACL Data, SCO/eSCO Data**
 
 3、ACL、SCO数据是 l2cap数据是通过ACL数据传输给remote device。 一个l2cap包会按照规则先切割为多个HCI数据包。HCI数据包再通过HCI-usb这一层传递给USB设备。每个包又通过USB driver发送到底层。 
 
+# **1. HCI层协议概述**
+
+HCI提供一套统一的方法来访问Bluetooth底层, 用来沟通Host和Module , Host通常就是PC , Module则是以各种物理连接形式（USB,serial,pc-card）连接到PC上的bluetooth Dongle。 
+
+**Hos端**：application,SDP,L2cap等协议都是软件形式提出的（Bluez中是以kernel层程序)。
+
+**Module端**：Link Manager, BB, 等协议都是硬件中firmware提供的。 
+
+ HCI  它一部分在软件中实现，用来给上层协议和程序提供访问接口（Bluez中hci.c hci_usb.c hci_sock.c等）.另一部分也是在Firmware中实现，用来将软件部分的指令方式传递给底层。 
+
+
+
+HCI有4种不同形式的传输：**Commands, Event, ACL Data, SCO/eSCO Data**
+
+1、 HCI Command是Host向Modules发送命令的一种方式。 
+
+2、 HCI Event是 Modules向Host发送一些信息 
+
+3、ACL、SCO数据是 l2cap数据是通过ACL数据传输给remote device。 一个l2cap包会按照规则先切割为多个HCI数据包。HCI数据包再通过HCI-usb这一层传递给USB设备。每个包又通过USB driver发送到底层。 
+
 
 
 ##  **HCI 层的编程** 
@@ -197,15 +217,16 @@ l2CAP是Linux Bluetooth编程的基础。几乎所有协议的连接，断连，
 **1.创建L2CAP Socket：**
 
 ```c
-socket(PF_BLUETOOTH, SOCK_RAW, BTPROTO_L2CAP);
+socket(PF_BLUETOOTH, SOCK_RAW, BTPROTO_L2CAP);  
 
-domain=PF_BLUETOOTH,
+domain=PF_BLUETOOTH,  
 
-protocol=BTPROTO_L2CAP.
+protocol=BTPROTO_L2CAP.  
 ```
 
 **2.绑定：**
 
+```c
 // Bind to local address
  memset(&addr, 0, sizeof(addr));
  addr.l2_family = AF_BLUETOOTH;
@@ -215,32 +236,33 @@ protocol=BTPROTO_L2CAP.
  perror("Can't bind socket");
  goto error;
  }
+```
 
  
 
 **3.连接**
 
+```c++
 memset(&addr, 0, sizeof(addr));
 addr.l2_family = AF_BLUETOOTH;
 bacpy(addr.l2_bdaddr, src);
 
 addr.l2_psm = xxx; 
 
- if (connect(sk, (struct sockaddr *) &addr, sizeof(addr)) < 0) {
- perror("Can't connect");
- goto error;
- }
-
- 
+if (connect(sk, (struct sockaddr *) &addr, sizeof(addr)) < 0) {
+ 	perror("Can't connect");
+ 	goto error;
+}
+```
 
 **注意：**
 
-**struct sockaddr_l2 {**
- **sa_family_t l2_family;  //必须为 AF_BLUETOOTH**
- **unsigned short l2_psm;  //与前面PSM对应,这一项很重要**
- **bdaddr_t l2_bdaddr;   //Remote Device BDADDR**
- **unsigned short l2_cid;** 
-**};**
+**struct sockaddr_l2 {**  
+ **sa_family_t l2_family;  //必须为 AF_BLUETOOTH**  
+ **unsigned short l2_psm;  //与前面PSM对应,这一项很重要**  
+ **bdaddr_t l2_bdaddr;   //Remote Device BDADDR**  
+ **unsigned short l2_cid;**   
+**};**  
 
 
 
@@ -274,9 +296,9 @@ int str2ba(const char *str, bdaddr_t *ba)
 
 **inquiry 远程Bluetooth Device**
 
-int hci_inquiry(int dev_id, int len, int nrsp, const uint8_t *lap, inquiry_info **ii, long flags)
+int hci_inquiry(int dev_id, int len, int nrsp, const uint8_t *lap, inquiry_info **ii, long flags)  
 
-hci_inquiry（）用来命令指定的Dongle去搜索周围所有bluetooth device.并将搜索到的Bluetooth Device bdaddr 传递回来。
+hci_inquiry（）用来命令指定的Dongle去搜索周围所有bluetooth device.并将搜索到的Bluetooth   Device bdaddr 传递回来。
 
 参数1：dev_id：指定Dongle Device ID。如果此值小于0，则会使用第一个可用的Dongle。
 
