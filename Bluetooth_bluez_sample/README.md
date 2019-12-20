@@ -27,7 +27,7 @@ TX bytes:701 acl:0 sco:0 commands:49 errors:0
 
 查看蓝牙及无线设备是否被 `blocked`, 如:
 
-```shell
+```
 $ sudo rfkill list
 0: hci0: Bluetooth
 Soft blocked: no
